@@ -1,4 +1,4 @@
-export function isValidHttpUrl(string) {
+function isValidHttpUrl(string) {
   let url;
   try {
     url = new URL(string);
@@ -7,3 +7,5 @@ export function isValidHttpUrl(string) {
   }
   return url.protocol === "http:" || url.protocol === "https:";
 }
+
+exports.isValidHttpUrl = isValidHttpUrl;

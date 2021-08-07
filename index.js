@@ -1,9 +1,11 @@
-import express from "express";
-import apiRouter from "./api/routes.mjs";
-import { Deta } from "deta";
-import { redirecting } from "./api/controllers.mjs";
-import cors from "cors";
+const express = require("express");
+const apiRouter = require("./api/routes.js");
+const Deta = require("deta").Deta;
+const redirecting = require("./api/controllers.js").redirecting;
+const cors = require("cors");
+const dotenv = require("dotenv");
 
+dotenv.config();
 const port = 1375;
 const app = express();
 const corsOptions = {
@@ -25,6 +27,6 @@ app.listen(port, () => {
 
 app.use("/api/", apiRouter);
 app.get("/:key", redirecting);
-app.get("/", (req, res) => {
-  res.send("mujz. another link shortener!");
-});
+app.use("/", express.static("build"));
+
+module.exports = app;
